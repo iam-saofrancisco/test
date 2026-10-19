@@ -1,0 +1,6 @@
+Coloque aqui as músicas de fundo (.mp3, .wav, .m4a, .ogg).
+
+A playlist fica registrada em js/dados.js (lista "musicas").
+Peça ajuda ao assistente para adicionar novas músicas.
+
+Use músicas que você tem o direito de usar.

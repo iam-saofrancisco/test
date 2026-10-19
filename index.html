@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Álbum de fotos de Vitor & Lariça — nossa história ❤️">
+  <meta name="theme-color" content="#faf6f1">
+  <title>Álbum</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icones/icon-180.png">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+  <header id="capa" class="capa">
+    <div id="capa-fundo" class="capa-fundo" aria-hidden="true"></div>
+    <div class="capa-conteudo">
+      <p id="monograma" class="monograma"></p>
+      <h1 id="titulo-album"></h1>
+      <p id="subtitulo-album" class="subtitulo"></p>
+      <p id="contador-casal" class="contador" hidden></p>
+
+      <div class="capa-acoes">
+        <button id="botao-apresentar" class="botao-acao botao-destaque" type="button">▶ Apresentar</button>
+        <button id="botao-pdf" class="botao-acao" type="button">📄 Exportar PDF</button>
+        <div class="menu-area">
+          <button id="botao-compartilhar" class="botao-acao" type="button" aria-haspopup="true" aria-expanded="false">🔗 Compartilhar</button>
+          <div id="menu-compartilhar" class="menu-compartilhar" hidden>
+            <button type="button" data-acao="copiar">📋 Copiar link</button>
+            <button type="button" data-acao="whatsapp">💬 Enviar no WhatsApp</button>
+            <button type="button" data-acao="nativo" id="compartilhar-nativo" hidden>📤 Compartilhar…</button>
+          </div>
+        </div>
+        <button id="botao-tema" class="botao-acao botao-icono" type="button" aria-label="Alternar tema">🌙</button>
+      </div>
+
+      <div class="busca-area">
+        <input id="campo-busca" type="search" placeholder="🔍 Buscar foto pelo nome…" autocomplete="off" aria-label="Buscar foto">
+      </div>
+    </div>
+  </header>
+
+  <nav id="abas" class="abas" aria-label="Abas do álbum"></nav>
+
+  <main class="conteudo">
+    <div id="print-info" class="print-info"></div>
+    <p id="resultado-busca" class="resultado-busca" hidden></p>
+
+    <section id="grade-fotos" class="grade" aria-label="Fotos"></section>
+
+    <section id="secao-videos" class="secao-videos" hidden>
+      <h2>🎬 Vídeos</h2>
+      <div id="grade-videos" class="grade"></div>
+    </section>
+
+    <div id="aba-vazia" class="vazio" hidden>
+      <p class="vazio-emoji">🖼️</p>
+      <p>Esta aba ainda está vazia.</p>
+      <p class="vazio-dica">Coloque fotos em <code>midia/fotos/…</code> e peça ao assistente para atualizar o álbum.</p>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <p id="frase-rodape" class="frase-rodape" hidden></p>
+    <p id="rodape-info"></p>
+  </footer>
+
+  <!-- ===== Visualizador de foto ===== -->
+  <div id="lightbox" class="lightbox" hidden>
+    <div class="lb-topo">
+      <a id="lb-baixar" class="lb-botao" download title="Baixar foto">⬇</a>
+      <button id="lb-fechar" class="lb-botao lb-fechar" aria-label="Fechar">✕</button>
+    </div>
+
+    <div class="lightbox-caixa">
+      <div id="lb-imagem-area" class="lb-imagem-area">
+        <button id="lb-anterior" class="lb-botao lb-navegar lb-anterior" aria-label="Foto anterior">‹</button>
+        <img id="lb-img" src="" alt="">
+        <button id="lb-proxima" class="lb-botao lb-navegar lb-proxima" aria-label="Próxima foto">›</button>
+        <div class="lb-legenda">
+          <h3 id="lb-titulo"></h3>
+          <p id="lb-descricao"></p>
+          <span id="lb-contador" class="lb-contador"></span>
+        </div>
+      </div>
+
+      <aside class="lb-comentarios">
+        <div class="comentarios-topo">
+          <h4>💬 Comentários <span id="lb-comentarios-contagem"></span></h4>
+          <button id="lb-favorito" class="lb-favorito" type="button">☆ Favoritar</button>
+        </div>
+        <p class="dica-local">Salvos apenas neste aparelho</p>
+        <ul id="lb-comentarios-lista" class="comentarios-lista"></ul>
+        <form id="form-comentario" class="form-comentario">
+          <input id="campo-nome" type="text" placeholder="Seu nome" maxlength="30" autocomplete="name">
+          <textarea id="campo-comentario" placeholder="Escreva um comentário…" maxlength="500" rows="2" required></textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ===== Slideshow (apresentação) ===== -->
+  <div id="slideshow" class="slideshow" hidden>
+    <img id="ss-img" src="" alt="">
+    <p id="ss-legenda" class="ss-legenda"></p>
+    <p id="ss-contador" class="ss-contador"></p>
+    <div class="ss-controles">
+      <button id="ss-anterior" class="ss-botao" type="button" aria-label="Anterior">⏮</button>
+      <button id="ss-pausar" class="ss-botao ss-pausar" type="button" aria-label="Pausar">⏸</button>
+      <button id="ss-proxima" class="ss-botao" type="button" aria-label="Próxima">⏭</button>
+      <button id="ss-fechar" class="ss-botao ss-fechar" type="button">✕ Fechar</button>
+    </div>
+  </div>
+
+  <!-- ===== Música de fundo ===== -->
+  <div id="musica-widget" class="musica-widget" hidden>
+    <p id="musica-dica" class="musica-dica" hidden>🔊 Toque para ativar a música</p>
+    <div id="musica-painel" class="musica-painel" hidden>
+      <p id="musica-nome" class="musica-nome"></p>
+      <div class="musica-controles">
+        <button id="musica-anterior" type="button" aria-label="Música anterior">⏮</button>
+        <button id="musica-play" class="musica-play" type="button" aria-label="Tocar ou pausar">▶</button>
+        <button id="musica-proxima" type="button" aria-label="Próxima música">⏭</button>
+      </div>
+      <label class="musica-volume" for="musica-volume">🔊
+        <input id="musica-volume" type="range" min="0" max="1" step="0.05" value="0.7">
+      </label>
+    </div>
+    <button id="musica-botao" class="musica-botao" type="button" aria-label="Música de fundo">🎵</button>
+  </div>
+
+  <audio id="audio-musica" preload="auto"></audio>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="js/dados.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

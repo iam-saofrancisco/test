@@ -1,0 +1,9 @@
+Coloque seus vídeos nesta pasta (formato .mp4 é o mais compatível).
+
+Depois, peça ao assistente no opencode para registrar os vídeos no álbum.
+
+Dicas:
+- Evite nomes com acentos ou espaços (ex.: prefira "aniversario-2026.mp4").
+- Cada arquivo deve ter até ~100 MB (limite do GitHub Pages).
+- Vídeos grandes: publique como "não listado" no YouTube e registre no
+  js/dados.js com: { youtube: "ID_DO_VIDEO", titulo: "..." }
